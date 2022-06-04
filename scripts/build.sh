@@ -1,5 +1,5 @@
 # Builds a docker image
-# ./setup.sh [ImageName]
+# ./build.sh [ImageName]
 ## ImageName - name of the image to build
 
 # Default image name

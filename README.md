@@ -5,7 +5,7 @@ For running a docker program continously in the background
 
 # Build an image
 
-`./setup.sh [ImageName]`
+`./build.sh [ImageName]`
 
 Defaults:
 1. `ImageName`=myubuntu
