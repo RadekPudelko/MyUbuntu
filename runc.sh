@@ -1,16 +1,19 @@
 # Initializes a docker container
 
-# ./initc.sh [-i ImageName] [-c ContainerName]
+# ./initc.sh [-i ImageName] [-c ContainerName] [-d SharedDirectoryName]
 ## -i ImageName - Specify the Docker Image Name, if not given than name in the .iname file will be used
 ## -c ContainerName - Specify the Docker Container Name
+## -d SharedDirectoryName - The name of the shared directory
 
 # Default image name
 IName=$(cat .iname)
 # Default container name
-CName=MyUbuntu 
+CName=MyUbuntu
+HOST_PATH=$(PWD)/shared
+CONTAINER_PATH=~
 
 # Parse arguments
-while getopts 'i:c:' OPTION; do
+while getopts 'i:c:d:' OPTION; do
   case "$OPTION" in
     i)
         IName="$OPTARG"
@@ -20,8 +23,12 @@ while getopts 'i:c:' OPTION; do
         CName="$OPTARG"
         echo "$OPTARG"
         ;;
+    d)
+        DName="$OPTARG"
+        echo "$OPTARG"
+        ;;
     ?)
-        echo "script usage: $(basename \$0) [-i DockerImageName] [-c ContainerImageName]" >&2
+        echo "script usage: $(basename \$0) [-i DockerImageName] [-c ContainerImageName] [-d SharedDirectoryName]" >&2
         exit 1
         ;;
   esac
@@ -29,7 +36,7 @@ done
 shift "$(($OPTIND -1))"
 
 # Run the docker command
-echo "CMD: docker run -dt --name $CName $IName"
+echo "CMD: docker run -dt --name -v $HOST_PATH:$(CONTAINER_PATH) $CName $IName"
 docker run -dt --name $CName $IName
 
 # Store the container name in a file

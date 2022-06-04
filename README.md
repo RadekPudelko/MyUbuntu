@@ -10,9 +10,9 @@ For running a docker program continously in the background
 Defaults:
 1. `ImageName`=myubuntu
 
-# Init a container
+# Run a container
 
-`./initc.sh [-i ImageName] [-c ContainerName]`
+`./initc.sh [-i ImageName] [-c ContainerName] [-d SharedDirectoryName]`
 
 Defaults:
 1. `ImageName`=contents of `.iname` file
