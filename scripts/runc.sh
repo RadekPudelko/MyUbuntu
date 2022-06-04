@@ -10,7 +10,7 @@ IName=$(cat .iname)
 # Default container name
 CName=MyUbuntu
 HOST_PATH=$(PWD)/shared
-CONTAINER_PATH=~
+CONTAINER_PATH="/root"
 
 # Parse arguments
 while getopts 'i:c:d:' OPTION; do
@@ -36,8 +36,8 @@ done
 shift "$(($OPTIND -1))"
 
 # Run the docker command
-echo "CMD: docker run -dt --name -v $HOST_PATH:$(CONTAINER_PATH) $CName $IName"
-docker run -dt --name $CName $IName
+echo "CMD: docker run -dt --name -v $CName $HOST_PATH:$CONTAINER_PATH $IName"
+docker run -dt --name $CName -v $HOST_PATH:$CONTAINER_PATH $IName
 
 # Store the container name in a file
 echo $CName > .cname

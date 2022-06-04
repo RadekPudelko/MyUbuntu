@@ -1,6 +1,6 @@
 # Removes a docker contianer
 
-# ./rnc.sh [ContainerName]
+# ./rmc.sh [ContainerName]
 ## ContainerName - name of the container to stop. If not supplied
 ## than the container in .cname will be used
 
